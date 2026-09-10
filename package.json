@@ -18,6 +18,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "test": "node test/run-tests.js",
     "lint": "node --check relay-bridge.mjs"
   },
   "keywords": [

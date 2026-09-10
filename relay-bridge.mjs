@@ -398,6 +398,16 @@ const COMMANDS = {
 // describes what is on disk.
 const CLEARS_TEST = new Set(['get', 'discard']);
 
+// When a step fails, git's own output is accurate but not kind. These add one
+// plain line for the failures a user is most likely to hit, saying what happened
+// and -- the part that matters -- that nothing was changed.
+const HINTS = {
+  get: () => 'The workbench and your laptop have both moved on, so they cannot be'
+    + ' fast-forwarded together.\nNothing here was changed. Get merges with --ff-only'
+    + ' on purpose, so it stops rather than\ninventing a merge you did not ask for.'
+    + ` To combine them by hand:\n    git merge ${config.workbenchRemote}/${config.branch}`,
+};
+
 function commandTable() {
   const out = {};
   for (const name of Object.keys(COMMANDS)) out[name] = COMMANDS[name]();
@@ -1173,7 +1183,13 @@ el('b-publish').onclick=function(){
 el('b-discard').onclick=function(){
   fetch('/api/state').then(function(r){return r.json()}).then(function(s){
     var msg='This resets your laptop to whatever GitHub has.';
+    /* Uncommitted work goes first because it is the half that cannot come back.
+       A discarded commit is still in the reflog; an uncommitted edit has never
+       existed anywhere else. */
+    if(s.dirty.length)msg+='\n\n'+s.dirty.length+' uncommitted change'+(s.dirty.length===1?'':'s')
+      +' will be lost for good - no commit, no remote, no copy:\n'+s.dirty.join('\n');
     if(s.outgoing.length)msg+='\n\n'+s.outgoing.length+' of your own commit(s) will be DESTROYED:\n'+s.outgoing.join('\n');
+    if(!s.dirty.length&&!s.outgoing.length)msg+='\n\nNothing would be lost - this laptop already matches the safe.';
     if(confirm(msg))act('discard');
   });
 };
@@ -1567,6 +1583,7 @@ function serve(port) {
       if (CLEARS_TEST.has(name)) tested = false;
       startJob(name, command, (code) => {
         if (name === 'test') tested = code === 0;
+        if (code !== 0 && HINTS[name]) job.output += `\n${HINTS[name]()}\n`;
       });
       return send(res, 200, { ok: true });
     }
