@@ -374,6 +374,14 @@ function state() {
 // button, so the description of an action and the action itself come from one
 // place -- the alternative is a caption that drifts from the deed it describes,
 // on a screen whose whole job is being trusted with `git reset --hard`.
+// `git remote set-url` fails outright when the remote does not exist yet, and
+// on a first run it usually does not: the normal starting point is a repo with
+// only a GitHub remote and no workbench at all. Pick the verb that fits.
+function wireRemote(remote, url) {
+  const verb = read(`git remote get-url ${remote}`) === null ? 'add' : 'set-url';
+  return `git remote ${verb} ${remote} "${url.replace(/"/g, '')}"`;
+}
+
 const COMMANDS = {
   get: () => {
     const target = `${config.workbenchRemote}/${config.branch}`;
@@ -1476,7 +1484,7 @@ function serve(port) {
         workbenchUrl = null;
         startJob('move to new project',
           `git push ${safe} ${branch} --tags`
-          + ` && git remote set-url ${bench} "${project.http_url_to_repo}"`
+          + ` && ${wireRemote(bench, project.http_url_to_repo)}`
           + ` && git push ${bench} --all && git push ${bench} --tags`);
         return send(res, 200, {
           ok: true,
@@ -1542,7 +1550,7 @@ function serve(port) {
         workbenchUrl = null;
         startJob('relocate',
           `git push ${safe} ${branch} --tags`
-          + ` && git remote set-url ${bench} "${target.replace(/"/g, '')}"`
+          + ` && ${wireRemote(bench, target)}`
           + ` && git push ${bench} --all && git push ${bench} --tags`);
         return send(res, 200, { ok: true });
       }
