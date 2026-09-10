@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/relay-bridge-lockup-dark.png">
-    <img src="assets/relay-bridge-lockup-light.png" alt="Relay Bridge" width="430">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duhhitsHIM/relay-bridge/main/assets/relay-bridge-lockup-dark.png">
+    <img src="https://raw.githubusercontent.com/duhhitsHIM/relay-bridge/main/assets/relay-bridge-lockup-light.png" alt="Relay Bridge" width="430">
   </picture>
 </p>
 
@@ -18,8 +18,8 @@ Run it from inside your repository. It opens `http://localhost:4317/`.
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/screenshot-dark.png">
-    <img src="assets/screenshot-light.png" alt="The Relay Bridge dashboard: a pipeline from GitLab through the laptop to GitHub, a Workflow panel where every step prints the command it runs, and the output of a passing test suite." width="830">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/duhhitsHIM/relay-bridge/main/assets/screenshot-dark.png">
+    <img src="https://raw.githubusercontent.com/duhhitsHIM/relay-bridge/main/assets/screenshot-light.png" alt="The Relay Bridge dashboard: a pipeline from GitLab through the laptop to GitHub, a Workflow panel where every step prints the command it runs, and the output of a passing test suite." width="830">
   </picture>
 </p>
 
