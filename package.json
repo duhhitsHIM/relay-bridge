@@ -1,0 +1,43 @@
+{
+  "name": "relay-bridge",
+  "version": "0.1.0",
+  "description": "A local dashboard for a GitHub-as-safe / GitLab-as-disposable-workbench git workflow. One file, zero dependencies.",
+  "type": "module",
+  "bin": {
+    "relay-bridge": "./relay-bridge.mjs"
+  },
+  "main": "./relay-bridge.mjs",
+  "exports": "./relay-bridge.mjs",
+  "files": [
+    "relay-bridge.mjs",
+    "assets/relay-bridge-*.png",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "lint": "node --check relay-bridge.mjs"
+  },
+  "keywords": [
+    "git",
+    "gitlab",
+    "github",
+    "workflow",
+    "dashboard",
+    "remote",
+    "zero-dependency",
+    "cli"
+  ],
+  "author": "𝙷𝙸𝙼 𓃵",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duhhitsHIM/relay-bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/duhhitsHIM/relay-bridge/issues"
+  },
+  "homepage": "https://github.com/duhhitsHIM/relay-bridge#readme"
+}

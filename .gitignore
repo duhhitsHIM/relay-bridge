@@ -1,0 +1,25 @@
+# Your GitLab token never belongs in a repository. Relay Bridge keeps it in your
+# user config directory, but this catches an older copy or a hand-made file.
+.relay-bridge-token
+*.token
+
+# Per-repository settings. No secrets in it, so committing it in *your* project
+# is fine if a team shares the workflow — it is ignored here only to keep this
+# repo clean when the tool is run on itself.
+relay-bridge.config.json
+
+node_modules/
+npm-debug.log*
+*.log
+*.tgz
+
+.env
+.env.*
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.idea/
+.vscode/
+*.swp
