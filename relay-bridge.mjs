@@ -1647,8 +1647,12 @@ server.on('error', (error) => {
   throw error;
 });
 
+// Bind to the IPv4 loopback specifically: that is the security boundary, and
+// it is unreachable from any other machine. The address shown and opened is
+// `localhost`, which is friendlier and which browsers resolve to this server
+// (falling back from ::1 to 127.0.0.1 when the host prefers IPv6).
 server.listen(PORT, '127.0.0.1', () => {
-  const address = `http://127.0.0.1:${PORT}/`;
+  const address = `http://localhost:${PORT}/`;
   const line = (label, value) => `  ${label.padEnd(11)}${value}`;
   console.log(`\n  Relay Bridge ${VERSION}\n  ${address}\n`);
   if (configured) {

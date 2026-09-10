@@ -14,7 +14,7 @@
 npx relay-bridge
 ```
 
-Run it from inside your repository. It opens `http://127.0.0.1:4317/`.
+Run it from inside your repository. It opens `http://localhost:4317/`.
 
 <p align="center">
   <picture>
