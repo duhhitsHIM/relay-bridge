@@ -4,7 +4,7 @@
  *
  * The model it enforces:
  *   GitHub, "the safe"       permanent, never expires, nothing is ever lost.
- *   GitLab, "the workbench"  disposable, swapped when trial credits run out.
+ *   GitLab, "the workbench"  disposable, swapped when you want to move on.
  *   Your laptop              carries work between the two, and is the only
  *                            place the test suite actually runs.
  *
@@ -872,7 +872,7 @@ pre.term code{font:11px/1.7 var(--mono);white-space:pre-wrap;word-break:break-wo
   </section>
 
   <details class="panel disclosure" id="d-move">
-    <summary><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>New workbench, for when credits run out</summary>
+    <summary><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>New workbench, to move this repo to another GitLab project</summary>
     <div class="disclosure-body stack">
       <div id="need-token" class="stack" hidden>
         <p class="hint">Paste a GitLab token with <b>api</b> scope once and this can make the group and the project for you. <a href="https://gitlab.com/-/user_settings/personal_access_tokens" target="_blank" rel="noreferrer">Make one here <svg class="icon sm" aria-hidden="true"><use href="#i-external-link"></use></svg></a>. Stored outside this repository, at <code id="token-path">your user config directory</code>, and it never leaves this machine.</p>
@@ -1447,9 +1447,9 @@ function serve(port) {
       }
     }
 
-    // The whole "credits ran out" dance in one call: make the group if asked, make
-    // the project, point the workbench at it, push. The safe is pushed first
-    // inside the job, so a failure anywhere here cannot cost you work.
+    // Relocating a workbench in one call: make the group if asked, make the
+    // project, point the workbench at it, push. The safe is pushed first inside
+    // the job, so a failure anywhere here cannot cost you work.
     if (url.pathname === '/api/gitlab/newproject' && req.method === 'POST') {
       const input = await readBody(req);
       if (job.running) return send(res, 409, { error: 'Something is already running.' });

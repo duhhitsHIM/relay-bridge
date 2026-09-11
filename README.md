@@ -88,11 +88,16 @@ choice sticks — the OS flipping at sunset isn't a reason to overrule a deliber
 carries the same tokens, spacing and components as the Relay dashboard, so the two read as one
 family: dark wears terracotta, light wears indigo.
 
-Below that, two things for the day the credits run out:
+Below that, two housekeeping panels:
 
-**New workbench.** Creates a GitLab group and a private project through the API, pushes to the safe
-*first* so nothing can be lost if the rest fails, repoints the workbench remote, pushes everything
-up, then hands you the trial link. Starting the trial is the single step GitLab has no API for.
+**New workbench.** Moves this repository to a different GitLab project — create one, or point at one
+you already have. It pushes to the safe *first* so nothing can be lost if the rest fails, then
+repoints the workbench remote and pushes everything up.
+
+Worth being clear about what this is *not*: GitLab trials and Duo credits are scoped to your
+**top-level group and your user seat**, not to a project. Creating a new project — or a new
+group — does not refresh an exhausted trial. This panel is for genuinely relocating a workbench,
+which is a real thing to want, and nothing more.
 
 **Your GitLab.** Lists every project and group you own, sorted by recent activity, and deletes any of
 them — behind a type-the-name confirmation. Your current workbench is tagged so you cannot nuke it by
